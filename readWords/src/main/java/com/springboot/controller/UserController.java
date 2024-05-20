@@ -1,4 +1,4 @@
-package controller;
+package com.springboot.controller;
 
 import com.springboot.domain.entity.User;
 import com.springboot.service.UserService;

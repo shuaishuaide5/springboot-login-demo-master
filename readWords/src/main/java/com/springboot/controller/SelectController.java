@@ -1,4 +1,4 @@
-package controller;
+package com.springboot.controller;
 
 import com.springboot.domain.entity.ResponseResult;
 import com.springboot.service.SelectService;
