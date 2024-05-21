@@ -13,7 +13,7 @@ public class UserController {
     @Resource
     private UserService userService;
 
-    @PostMapping("/login")
+    @PostMapping("/login")//@RequestParam String uname, @RequestParam String password
     public Result<User> loginController(@RequestParam String uname, @RequestParam String password){
         User user = userService.loginService(uname, password);
         if(user!=null){

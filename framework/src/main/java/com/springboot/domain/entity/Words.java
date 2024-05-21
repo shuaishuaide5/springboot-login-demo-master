@@ -30,6 +30,11 @@ public class Words extends Model<Words> {
     private Integer rem;
 //不记得次数
     private Integer times;
+    //背单词
+    //状态码 记住，不记得，模糊，未出现
+    private Integer  state = 1;
+
+
 
 
 
