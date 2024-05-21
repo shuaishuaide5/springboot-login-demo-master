@@ -28,8 +28,8 @@ public class SelectController {
         return numSelService.selectNum(number);
     }
 
-    @RequestMapping("/Menu/recite")
-    private ResponseResult recite(@PathVariable Integer state,Integer id) {
+    @RequestMapping("/Menu/recite/{state}/{id}")
+    private ResponseResult recite(@PathVariable Integer state,@PathVariable Integer id) {
         return  reciteService.recite(state,id);
     }
 }
