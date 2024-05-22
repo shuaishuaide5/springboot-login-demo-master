@@ -18,14 +18,8 @@ import lombok.NoArgsConstructor;
 @TableName("tableInfo.name")
 public class Enbook {
 
-    private String name;
-//单词等级
-    private Integer levels;
-//介绍
-    private String introduction;
-//适用人群
-    private String people;
-
+    static Integer MAX_WORDS = 4;
+    private Integer state; private Integer id; private Integer uid;
 
 
 }

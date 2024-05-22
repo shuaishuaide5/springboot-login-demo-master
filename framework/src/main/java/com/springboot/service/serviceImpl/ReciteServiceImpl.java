@@ -9,15 +9,15 @@ import com.springboot.service.ReciteService;
 import com.springboot.domain.entity.ResponseResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 @Service("reciteService")
 public class ReciteServiceImpl extends ServiceImpl<WordsDao, Words> implements ReciteService {
+    static Integer MAX_WORDS = 4;
     @Autowired
     private WordsDao wordsDao;
     @Override
-    public ResponseResult recite(Integer state,Integer id) {
+    public ResponseResult recite(Integer state,Integer id,Integer uid) {
         LambdaUpdateWrapper<Words> updateWrapper = new LambdaUpdateWrapper<>();
-        updateWrapper.eq(Words::getId, id)  // 设置更新条件
+        updateWrapper.eq(Words::getId, id%MAX_WORDS+uid*4-4)  // 设置更新条件
                 .set(Words::getState, state);  // 设置要更新的字段和值
         wordsDao.update(null, updateWrapper);
         //int tem = Words::getState;
