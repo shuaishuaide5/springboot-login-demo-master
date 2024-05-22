@@ -14,9 +14,9 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/login")//@RequestParam String uname, @RequestParam String password
-    public Result<User> loginController(@RequestParam String uname, @RequestParam String password){
-        User user = userService.loginService(uname, password);
-        if(user!=null){
+    public Result<User> loginController(@RequestBody User user){
+        User user2 = userService.loginService(user.getUname(), user.getPassword());
+        if(user2!=null){
             return Result.success(user,"登录成功！");
         }else{
             return Result.error("123","账号或密码错误！");
