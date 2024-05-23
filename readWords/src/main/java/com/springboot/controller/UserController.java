@@ -1,10 +1,18 @@
 package com.springboot.controller;
 
+import com.springboot.domain.entity.ResponseResult;
 import com.springboot.domain.entity.User;
 import com.springboot.service.UserService;
-import com.springboot.utils.Result;
+import com.springboot.utils.JwtUtil;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 import javax.annotation.Resource;
 
 @RestController
@@ -15,22 +23,28 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/login")//@RequestParam String uname, @RequestParam String password
-    public Result<User> loginController(@RequestBody User user){
+    public ResponseResult loginController(@RequestBody User user){
         User user2 = userService.loginService(user.getUname(), user.getPassword());
+        Map<String, Object> map;
         if(user2!=null){
-            return Result.success(user,"登录成功！");
+            map = new HashMap<>();
+            String token;
+            //String uid = (String) user2.getUid();
+            token = JwtUtil.createJWT(UUID.randomUUID().toString(), String.valueOf(user2.getUid()), null);
+            map.put("token", token);
+            return new ResponseResult<>(200, "登陆成功", map);
         }else{
-            return Result.error("123","账号或密码错误！");
+            return new ResponseResult<>(300,"用户名或密码错误，请重新登录");
         }
     }
 
     @PostMapping("/register")
-    public Result<User> registController(@RequestBody User newUser){
+    public ResponseResult<User> registController(@RequestBody User newUser){
         User user = userService.registService(newUser);
         if(user!=null){
-            return Result.success(user,"注册成功！");
+            return new ResponseResult<>(user,"注册成功");
         }else{
-            return Result.error("456","用户名已存在！");
+            return new ResponseResult<>("注册失败,用户名已存在");
         }
     }
 }

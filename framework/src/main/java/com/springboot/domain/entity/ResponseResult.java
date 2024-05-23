@@ -16,9 +16,13 @@ public class ResponseResult<T> implements Serializable {
         this.msg = AppHttpCodeEnum.SUCCESS.getMsg();
     }
 
-    public ResponseResult(Integer code, T data) {
-        this.code = code;
+    public ResponseResult( T data,String msg) {
         this.data = data;
+        this.msg = msg;
+    }
+
+    public ResponseResult(String msg) {
+        this.msg = msg;
     }
 
     public ResponseResult(Integer code, String msg, T data) {
@@ -75,7 +79,7 @@ public class ResponseResult<T> implements Serializable {
         return this;
     }
 
-    public ResponseResult<?> ok(Integer code, T data) {
+    public ResponseResult<?> ok( T data,String msg) {
         this.code = code;
         this.data = data;
         return this;
