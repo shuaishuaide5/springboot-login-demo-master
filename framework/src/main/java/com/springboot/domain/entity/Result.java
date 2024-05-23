@@ -1,9 +1,4 @@
-package com.springboot.utils;
-
-import com.springboot.domain.entity.ResponseResult;
-import com.springboot.enums.AppHttpCodeEnum;
-
-import static com.springboot.domain.entity.ResponseResult.setAppHttpCodeEnum;
+package com.springboot.domain.entity;
 
 public class Result<T> {
     private String code;
@@ -66,13 +61,6 @@ public class Result<T> {
         Result result = new Result();
         result.setCode(code);
         result.setMsg(msg);
-        return result;
-    }
-    public static Result okResult(Object token) {
-        Result result = new Result();
-        if(token!=null) {
-            result.setData(token);
-        }
         return result;
     }
 }

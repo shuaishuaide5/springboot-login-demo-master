@@ -2,6 +2,7 @@ package com.springboot.controller;
 
 import com.springboot.domain.entity.Enbook;
 import com.springboot.domain.entity.ResponseResult;
+import com.springboot.domain.entity.Result;
 import com.springboot.domain.entity.User;
 import com.springboot.service.UserService;
 import com.springboot.utils.JwtUtil;
@@ -23,7 +24,7 @@ public class UserController {
     @Resource
     private UserService userService;
 
-    @PostMapping("/login")//@RequestParam String uname, @RequestParam String password
+    /*@PostMapping("/login")//@RequestParam String uname, @RequestParam String password
     public ResponseResult loginController(@RequestBody Enbook user){
         User user2 = userService.loginService(user.getAccount(), user.getPassword());
         Map<String, Object> map;
@@ -37,6 +38,22 @@ public class UserController {
             return bak;
         }else{
             return new ResponseResult<>(300,"用户名或密码错误，请重新登录");
+        }
+    }*/
+
+    @PostMapping("/login")//@RequestParam String uname, @RequestParam String password
+    public Result loginController(@RequestBody Enbook user){
+        User user2 = userService.loginService(user.getAccount(), user.getPassword());
+        Map<String, Object> map;
+        if(user2!=null){
+            map = new HashMap<>();
+            String token;
+            token = JwtUtil.createJWT(UUID.randomUUID().toString(), String.valueOf(user2.getUid()), null);
+            map.put("token", token);
+            return Result.success(token);
+        }else{
+            //return new Result<>(300,"用户名或密码错误，请重新登录");
+            return Result.error("300","用户名或密码错误，请重新登录");
         }
     }
 

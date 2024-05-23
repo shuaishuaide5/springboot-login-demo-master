@@ -9,11 +9,17 @@ import com.springboot.service.ReciteService;
 import com.springboot.domain.entity.ResponseResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+
 @Service("reciteService")
 public class ReciteServiceImpl extends ServiceImpl<WordsDao, Words> implements ReciteService {
     static Integer MAX_WORDS = 4;
     @Autowired
     private WordsDao wordsDao;
+
+    private List link;
+
     @Override
     public ResponseResult recite(Integer state,Integer id,Integer uid) {
         LambdaUpdateWrapper<Words> updateWrapper = new LambdaUpdateWrapper<>();
