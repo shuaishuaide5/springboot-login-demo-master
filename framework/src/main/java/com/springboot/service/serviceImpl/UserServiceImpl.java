@@ -12,6 +12,9 @@ public class UserServiceImpl implements UserService {
     @Resource
     private UserDao userDao;
 
+    public static void main(String[] args) {
+
+    }
     @Override
     public User loginService(String uname, String password) {
         // 如果账号密码都对则返回登录的用户对象，若有一个错误则返回null

@@ -8,16 +8,17 @@ import java.io.Serializable;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ResponseResult<T> implements Serializable {
     private Integer code;
+    private T token;
     private String msg;
-    private T data;
 
+    private int id;
     public ResponseResult() {
         this.code = AppHttpCodeEnum.SUCCESS.getCode();
         this.msg = AppHttpCodeEnum.SUCCESS.getMsg();
     }
 
-    public ResponseResult( T data,String msg) {
-        this.data = data;
+    public ResponseResult( T token,String msg) {
+        this.token = token;
         this.msg = msg;
     }
 
@@ -25,10 +26,12 @@ public class ResponseResult<T> implements Serializable {
         this.msg = msg;
     }
 
-    public ResponseResult(Integer code, String msg, T data) {
+
+    public ResponseResult(Integer code, String msg,T token, int id) {
         this.code = code;
+        this.token = token;
         this.msg = msg;
-        this.data = data;
+        this.id = id;
     }
 
     public ResponseResult(Integer code, String msg) {
@@ -49,10 +52,10 @@ public class ResponseResult<T> implements Serializable {
         return result.ok(code, null, msg);
     }
 
-    public static ResponseResult okResult(Object data) {
+    public static ResponseResult okResult(Object token) {
         ResponseResult result = setAppHttpCodeEnum(AppHttpCodeEnum.SUCCESS, AppHttpCodeEnum.SUCCESS.getMsg());
-        if(data!=null) {
-            result.setData(data);
+        if(token!=null) {
+            result.settoken(token);
         }
         return result;
     }
@@ -79,21 +82,21 @@ public class ResponseResult<T> implements Serializable {
         return this;
     }
 
-    public ResponseResult<?> ok( T data,String msg) {
+    public ResponseResult<?> ok( T token,String msg) {
         this.code = code;
-        this.data = data;
+        this.token = token;
         return this;
     }
 
-    public ResponseResult<?> ok(Integer code, T data, String msg) {
+    public ResponseResult<?> ok(Integer code, T token, String msg) {
         this.code = code;
-        this.data = data;
+        this.token = token;
         this.msg = msg;
         return this;
     }
 
-    public ResponseResult<?> ok(T data) {
-        this.data = data;
+    public ResponseResult<?> ok(T token) {
+        this.token = token;
         return this;
     }
 
@@ -109,16 +112,32 @@ public class ResponseResult<T> implements Serializable {
         return msg;
     }
 
+    public T getToken() {
+        return token;
+    }
+
+    public void setToken(T token) {
+        this.token = token;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public void setMsg(String msg) {
         this.msg = msg;
     }
 
-    public T getData() {
-        return data;
+    public T gettoken() {
+        return token;
     }
 
-    public void setData(T data) {
-        this.data = data;
+    public void settoken(T token) {
+        this.token = token;
     }
 
 

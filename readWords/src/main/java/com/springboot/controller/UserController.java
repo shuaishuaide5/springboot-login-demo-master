@@ -1,5 +1,6 @@
 package com.springboot.controller;
 
+import com.springboot.domain.entity.Enbook;
 import com.springboot.domain.entity.ResponseResult;
 import com.springboot.domain.entity.User;
 import com.springboot.service.UserService;
@@ -17,14 +18,14 @@ import javax.annotation.Resource;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/user")
+//@RequestMapping("/user")
 public class UserController {
     @Resource
     private UserService userService;
 
     @PostMapping("/login")//@RequestParam String uname, @RequestParam String password
-    public ResponseResult loginController(@RequestBody User user){
-        User user2 = userService.loginService(user.getUname(), user.getPassword());
+    public ResponseResult loginController(@RequestBody Enbook user){
+        User user2 = userService.loginService(user.getAccount(), user.getPassword());
         Map<String, Object> map;
         if(user2!=null){
             map = new HashMap<>();
@@ -32,7 +33,8 @@ public class UserController {
             //String uid = (String) user2.getUid();
             token = JwtUtil.createJWT(UUID.randomUUID().toString(), String.valueOf(user2.getUid()), null);
             map.put("token", token);
-            return new ResponseResult<>(200, "登陆成功", map);
+            ResponseResult<String> bak = new ResponseResult<>(200, "登陆成功", token, user2.getUid());
+            return bak;
         }else{
             return new ResponseResult<>(300,"用户名或密码错误，请重新登录");
         }

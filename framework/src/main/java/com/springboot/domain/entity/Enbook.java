@@ -20,7 +20,8 @@ public class Enbook {
 
     static Integer MAX_WORDS = 4;
     private Integer state; private Integer id; private Integer uid;
-
+    private String account;
+    private String password;
 
 }
 

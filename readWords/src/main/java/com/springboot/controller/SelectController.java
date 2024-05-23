@@ -18,16 +18,17 @@ public class SelectController {
     private NumSelService numSelService;
     @Autowired
     private ReciteService reciteService;
+    @ResponseBody
     @RequestMapping("/Menu")
     private ResponseResult selectBook() {
         return selectService.selectBook();
     }
-
+    @ResponseBody
     @RequestMapping("/Menu/{number}")
     private ResponseResult selectNum(@PathVariable Integer number) {
         return numSelService.selectNum(number);
     }
-
+    @ResponseBody
     @RequestMapping("/Menu/recite")
     private ResponseResult recite(@RequestBody Enbook enbook) {
         return  reciteService.recite(enbook.getState(),enbook.getId(),enbook.getUid());
