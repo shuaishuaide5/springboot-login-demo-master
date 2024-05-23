@@ -1,9 +1,10 @@
 package com.springboot.service;
 
 import com.springboot.domain.entity.ResponseResult;
+import com.springboot.domain.entity.Result;
 
 public interface NumSelService {
 
-    public  ResponseResult selectNum(Integer number);
+    public Result selectNum(Integer number);
 
 }

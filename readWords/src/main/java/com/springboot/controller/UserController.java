@@ -58,12 +58,12 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public ResponseResult<User> registController(@RequestBody User newUser){
+    public Result<User> registController(@RequestBody User newUser){
         User user = userService.registService(newUser);
         if(user!=null){
-            return new ResponseResult<>(user,"注册成功");
+            return new Result<User>(user,"注册成功");
         }else{
-            return new ResponseResult<>("注册失败,用户名已存在");
+            return new Result<>("注册失败,用户名已存在");
         }
     }
 }

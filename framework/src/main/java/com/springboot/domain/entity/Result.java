@@ -1,9 +1,30 @@
 package com.springboot.domain.entity;
 
+import com.springboot.domain.vo.WordsVo;
+
+import java.util.List;
+
 public class Result<T> {
     private String code;
     private String msg;
     private T data;
+
+    public Result(T data, String msg) {
+        this.data = data;
+        this.msg = msg;
+    }
+
+    public Result(String msg) {
+        this.msg = msg;
+    }
+
+    public static Result okResult(Object data) {
+        Result result = new Result<>();
+        if(data!=null) {
+            result.setData(data);
+        }
+        return result;
+    }
 
     public String getCode() {
         return code;

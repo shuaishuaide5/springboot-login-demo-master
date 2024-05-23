@@ -17,9 +17,6 @@ public class ReciteServiceImpl extends ServiceImpl<WordsDao, Words> implements R
     static Integer MAX_WORDS = 4;
     @Autowired
     private WordsDao wordsDao;
-
-    private List link;
-
     @Override
     public ResponseResult recite(Integer state,Integer id,Integer uid) {
         LambdaUpdateWrapper<Words> updateWrapper = new LambdaUpdateWrapper<>();
