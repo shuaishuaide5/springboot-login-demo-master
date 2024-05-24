@@ -25,6 +25,13 @@ public class Result<T> {
         }
         return result;
     }
+    public static Result okResult(String msg) {
+        Result result = new Result<>();
+        if(msg!=null) {
+            result.setMsg(msg);
+        }
+        return result;
+    }
 
     public String getCode() {
         return code;

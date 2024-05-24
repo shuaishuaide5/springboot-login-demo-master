@@ -1,9 +1,15 @@
 package com.springboot.service;
 
 import com.springboot.domain.entity.Result;
+import com.springboot.domain.vo.TestVo;
 
 public interface TestService {
-    Result test(int uid);
+    void test(int uid,int time);
 
-    Result record(int uid,int id);
+    void record(int uid,int id);
+    Result finish();
+
+
+
+    boolean iftest(TestVo test1);
 }

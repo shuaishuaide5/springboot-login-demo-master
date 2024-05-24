@@ -1,7 +1,6 @@
 package com.springboot.controller;
 
-import com.springboot.domain.entity.Enbook;
-import com.springboot.domain.entity.ResponseResult;
+import com.springboot.domain.vo.UserVo;
 import com.springboot.domain.entity.Result;
 import com.springboot.domain.entity.User;
 import com.springboot.service.UserService;
@@ -9,11 +8,8 @@ import com.springboot.utils.JwtUtil;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.UUID;
 import javax.annotation.Resource;
 
@@ -42,7 +38,7 @@ public class UserController {
     }*/
 
     @PostMapping("/login")//@RequestParam String uname, @RequestParam String password
-    public Result loginController(@RequestBody Enbook user){
+    public Result loginController(@RequestBody UserVo user){
         User user2 = userService.loginService(user.getAccount(), user.getPassword());
         if(user2!=null){
             String token;

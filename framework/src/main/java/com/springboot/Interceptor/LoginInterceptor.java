@@ -14,7 +14,7 @@ public class LoginInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         //获取请求头中的token
-        String token = request.getHeader("token");
+        String token = request.getHeader("Authorization");
         //判断token是否为空，如果为空也代表未登录 提醒重新登录（401）
         if(!StringUtils.hasText(token)){
             response.sendError(HttpServletResponse.SC_UNAUTHORIZED);

@@ -3,6 +3,8 @@ package com.springboot.domain.entity;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import java.io.Serializable;
+import java.time.Instant;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,7 +25,7 @@ public class Record extends Model<Record> {
 //总分
     private Integer goal;
 //用户的考试时间
-    private String time;
+    private Instant time;
 //用字符串表示考试情况
     private String sum;
 

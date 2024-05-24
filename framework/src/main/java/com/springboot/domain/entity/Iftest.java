@@ -5,34 +5,22 @@ import com.baomidou.mybatisplus.extension.activerecord.Model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 /**
- * (Words)表实体类
+ * 检测用户是否在考试(Iftest)表实体类
  *
  * @author makejava
- * @since 2024-05-19 19:54:25
+ * @since 2024-05-24 23:25:40
  */
 @SuppressWarnings("serial")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@TableName("words")
-public class Words extends Model<Words> {
+@TableName("iftest")
+public class Iftest extends Model<Iftest> {
 
     private Integer id;
-
-    private String english;
-//单词等级
-    private Integer levles;
-//中文
-    private String cn;
-//不记得次数
-    private Integer times;
-    //背单词
-    //状态码 记住，不记得，模糊，未出现
-    private Integer  state = 1;
-
-
+//考试状态
+    private Integer test;
 
 
 

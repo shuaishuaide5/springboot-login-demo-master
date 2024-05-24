@@ -1,38 +1,70 @@
 package com.springboot.service.serviceImpl;
 
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.springboot.domain.entity.Iftest;
 import com.springboot.domain.entity.Record;
 import com.springboot.domain.entity.Result;
 import com.springboot.domain.entity.Words;
-import com.springboot.domain.vo.WordsVo;
+import com.springboot.domain.vo.TestVo;
+import com.springboot.repository.IftestDao;
 import com.springboot.repository.RecordDao;
 import com.springboot.repository.WordsDao;
 import com.springboot.service.TestService;
-import com.springboot.utils.BeanCopyUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+
+import javax.servlet.http.Cookie;
+import java.time.Instant;
+import java.util.UUID;
+
 @Service("testService")
 public class TestServiceImpl extends ServiceImpl<WordsDao,Words> implements TestService {
     @Autowired
     private RecordDao recordDao;
+    @Autowired
+    private IftestDao iftestDao;
     @Override
-    public Result test(int uid) {
+    public void test(int uid,int time) {
+        Instant now = Instant.now();
+        LambdaUpdateWrapper<Record> updateWrapper = new LambdaUpdateWrapper<>();
+        updateWrapper.eq(Record::getId,uid);
+        updateWrapper.set(Record::getTime,now);
+        recordDao.update(null, updateWrapper);
 
-        return null;
     }
 
     @Override
-    public Result record(int uid,int id) {
+    public void record(int uid,int id) {
         LambdaUpdateWrapper<Record> updateWrapper = new LambdaUpdateWrapper<>();
-        updateWrapper.eq(Record::getId,uid).eq(Record::getTime,null);
+        updateWrapper.eq(Record::getId,uid);
         Record temRecord = recordDao.selectOne(updateWrapper);
-        String tid = String.valueOf((long) id);
+        String tid ="";
+        if(id<=9) {
+            tid = "0";
+        }
+        tid = tid + (long) id;
         temRecord.setSum(temRecord.getSum() + tid);
         updateWrapper.set(Record::getSum,temRecord.getSum());
+        recordDao.update(null, updateWrapper);
         System.out.println("ok");
-        return null;
+        //return null;
     }
+
+    @Override
+    public Result finish() {
+        return Result.okResult("TIMEOUT");
+    }
+
+    @Override
+    public boolean iftest(TestVo test1) {
+        String sessionId = UUID.randomUUID().toString();
+        Cookie sessionCookie = new Cookie("sessionId", sessionId);
+        //response.addCookie(sessionCookie);
+        LambdaUpdateWrapper<Iftest> updateWrapper = new LambdaUpdateWrapper<>();
+        updateWrapper.eq(Iftest::getId,test1.getUid()).set(Iftest::getTest,1);
+        iftestDao.update(null,updateWrapper);
+        return true;
+    }
+
 }

@@ -1,6 +1,4 @@
-package com.springboot.domain.entity;
-
-import com.baomidou.mybatisplus.annotation.TableName;
+package com.springboot.domain.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,14 +13,12 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Enbook {
-
-    private Integer state; private Integer id; private Integer uid;
+public class UserVo {
     private String account;
     private String password;
 
 
-    public String getAccount() {
+    /*public String getAccount() {
         return account;
     }
 
@@ -36,6 +32,6 @@ public class Enbook {
 
     public void setPassword(String password) {
         this.password = password;
-    }
+    }*/
 }
 

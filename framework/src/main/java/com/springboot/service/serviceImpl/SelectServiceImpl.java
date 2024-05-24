@@ -11,11 +11,13 @@ import com.springboot.service.SelectService;
 import com.springboot.domain.vo.WordsVo;
 import com.springboot.utils.BeanCopyUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.List;
 
 
 @Service("selectService")
+@CrossOrigin
 public class SelectServiceImpl extends ServiceImpl<WordsDao,Words> implements SelectService {
     @Override
     public Result selectBook() {
