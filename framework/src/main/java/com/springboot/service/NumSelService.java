@@ -5,6 +5,6 @@ import com.springboot.domain.entity.Result;
 
 public interface NumSelService {
 
-    public Result selectNum(Integer number);
+     Result selectNum(Integer number);
 
 }

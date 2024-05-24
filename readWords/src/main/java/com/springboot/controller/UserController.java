@@ -44,12 +44,9 @@ public class UserController {
     @PostMapping("/login")//@RequestParam String uname, @RequestParam String password
     public Result loginController(@RequestBody Enbook user){
         User user2 = userService.loginService(user.getAccount(), user.getPassword());
-        Map<String, Object> map;
         if(user2!=null){
-            map = new HashMap<>();
             String token;
             token = JwtUtil.createJWT(UUID.randomUUID().toString(), String.valueOf(user2.getUid()), null);
-            map.put("token", token);
             return Result.success(token);
         }else{
             //return new Result<>(300,"用户名或密码错误，请重新登录");

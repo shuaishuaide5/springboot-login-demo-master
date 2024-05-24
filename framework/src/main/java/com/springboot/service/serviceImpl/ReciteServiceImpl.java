@@ -18,7 +18,7 @@ public class ReciteServiceImpl extends ServiceImpl<WordsDao, Words> implements R
     @Autowired
     private WordsDao wordsDao;
     @Override
-    public ResponseResult recite(Integer state,Integer id,Integer uid) {
+    public void recite(Integer state,Integer id,Integer uid) {
         LambdaUpdateWrapper<Words> updateWrapper = new LambdaUpdateWrapper<>();
         updateWrapper.eq(Words::getId, id%MAX_WORDS+uid*4-4)  // 设置更新条件
                 .set(Words::getState, state);  // 设置要更新的字段和值
@@ -29,6 +29,5 @@ public class ReciteServiceImpl extends ServiceImpl<WordsDao, Words> implements R
         updateWrapper.set(Words::getTimes,temWord.getTimes()+1);
         wordsDao.update(null, updateWrapper);
         System.out.println("ok");
-        return null;
     }
 }
