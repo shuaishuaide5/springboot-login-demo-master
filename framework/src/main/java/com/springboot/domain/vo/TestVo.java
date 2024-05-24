@@ -10,4 +10,5 @@ import lombok.NoArgsConstructor;
 public class TestVo {
     private int uid;
     private int time;//分钟
+    private String sessionId;
 }

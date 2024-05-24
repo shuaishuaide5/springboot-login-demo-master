@@ -1,5 +1,6 @@
 package com.springboot.service.serviceImpl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.springboot.domain.entity.Iftest;
 import com.springboot.domain.entity.Record;
@@ -14,7 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 
-import javax.servlet.http.Cookie;
 import java.time.Instant;
 import java.util.UUID;
 
@@ -57,14 +57,23 @@ public class TestServiceImpl extends ServiceImpl<WordsDao,Words> implements Test
     }
 
     @Override
-    public boolean iftest(TestVo test1) {
+    public Result iftest(TestVo test1) {
         String sessionId = UUID.randomUUID().toString();
-        Cookie sessionCookie = new Cookie("sessionId", sessionId);
-        //response.addCookie(sessionCookie);
+        //Cookie sessionCookie = new Cookie("sessionId", sessionId);
+
         LambdaUpdateWrapper<Iftest> updateWrapper = new LambdaUpdateWrapper<>();
-        updateWrapper.eq(Iftest::getId,test1.getUid()).set(Iftest::getTest,1);
+        updateWrapper.eq(Iftest::getId,test1.getUid()).set(Iftest::getTest,sessionId);
         iftestDao.update(null,updateWrapper);
-        return true;
+        return Result.okResult(sessionId);
+    }
+
+    @Override
+    public boolean ifCanTest(TestVo test1) {
+        LambdaQueryWrapper<Iftest> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(Iftest::getId,test1.getUid()).eq(Iftest::getTest,test1.getSessionId());
+        Iftest temWord;
+        temWord = iftestDao.selectOne(queryWrapper);
+        return temWord==null;
     }
 
 }

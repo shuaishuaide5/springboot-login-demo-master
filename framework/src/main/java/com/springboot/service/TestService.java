@@ -11,5 +11,7 @@ public interface TestService {
 
 
 
-    boolean iftest(TestVo test1);
+    Result iftest(TestVo test1);
+
+    boolean ifCanTest(TestVo test1);
 }

@@ -20,7 +20,7 @@ public class Iftest extends Model<Iftest> {
 
     private Integer id;
 //考试状态
-    private Integer test;
+    private String test;
 
 
 

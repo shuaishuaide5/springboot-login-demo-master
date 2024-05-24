@@ -26,13 +26,17 @@ public class TestController {
     public TestController(ScheduledTask scheduledTask) {
         this.scheduledTask = scheduledTask;
     }*/
-    /*@RequestMapping("/Menu/testStart")
+    @RequestMapping("/Menu/testStart")
     private Result testStart(@RequestBody TestVo test1) {
-        testService.iftest(test1);
-    }*/
+        if(test1.getSessionId() != null) return null;
+        return testService.iftest(test1);
+    }
     @RequestMapping("/Menu/test")
     private Result test(@RequestBody TestVo test1) {
         AtomicReference<Result> result = new AtomicReference<>();
+        if (testService.ifCanTest(test1)){
+            return Result.okResult("NO ACCESS");
+        }
         testService.test(test1.getUid(),test1.getTime());
         scheduleTask.startCountdown((long) (test1.getTime()), () -> {
             System.out.println( test1.getTime()*60+" seconds have passed! Performing a task...");
