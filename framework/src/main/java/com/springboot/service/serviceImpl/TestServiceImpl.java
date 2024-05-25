@@ -3,10 +3,8 @@ package com.springboot.service.serviceImpl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.springboot.domain.entity.Iftest;
-import com.springboot.domain.entity.Record;
-import com.springboot.domain.Methord.Result;
+import com.springboot.domain.myMethord.Result;
 import com.springboot.domain.entity.Words;
-import com.springboot.domain.vo.RecordVo;
 import com.springboot.domain.vo.TestVo;
 import com.springboot.repository.IftestDao;
 import com.springboot.repository.RecordDao;
@@ -16,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 
-import java.time.Instant;
 import java.util.List;
 import java.util.UUID;
 

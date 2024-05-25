@@ -1,11 +1,12 @@
 package com.springboot.domain.entity;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@Table(name = "user")
+@TableName("user")
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
@@ -43,6 +44,11 @@ public class User {
     }
 
     public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public User(String uname, String password) {
+        this.uname = uname;
         this.password = password;
     }
 }

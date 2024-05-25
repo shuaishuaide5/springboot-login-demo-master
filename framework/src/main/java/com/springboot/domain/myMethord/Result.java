@@ -1,13 +1,17 @@
-package com.springboot.domain.Methord;
+package com.springboot.domain.myMethord;
 
-import com.springboot.domain.entity.Words;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import java.util.List;
+@Data
+@AllArgsConstructor
 
 public class Result<T> {
     private String code;
     private String msg;
     private T data;
+    private Integer uid;
 
     public Result(T data, String msg) {
         this.data = data;
@@ -82,10 +86,11 @@ public class Result<T> {
         return result;
     }
 
-    public static <T> Result<T> success(T data) {
+    public static <T> Result<T> success(T data,Integer uid) {
         Result<T> result = new Result<>(data);
         result.setCode("0");
         result.setMsg("成功");
+        result.setUid(uid);
         return result;
     }
 

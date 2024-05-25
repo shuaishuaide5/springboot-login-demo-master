@@ -1,7 +1,7 @@
 package com.springboot.controller;
 
 import com.springboot.domain.vo.UserVo;
-import com.springboot.domain.Methord.Result;
+import com.springboot.domain.myMethord.Result;
 import com.springboot.domain.entity.User;
 import com.springboot.service.UserService;
 import com.springboot.utils.JwtUtil;
@@ -41,9 +41,10 @@ public class UserController {
     public Result loginController(@RequestBody UserVo user){
         User user2 = userService.loginService(user.getAccount(), user.getPassword());
         if(user2!=null){
+
             String token;
             token = JwtUtil.createJWT(UUID.randomUUID().toString(), String.valueOf(user2.getUid()), null);
-            return Result.success(token);
+            return Result.success(token,user2.getUid());
         }else{
             //return new Result<>(300,"用户名或密码错误，请重新登录");
             return Result.error("300","用户名或密码错误，请重新登录");
@@ -51,8 +52,8 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public Result<User> registController(@RequestBody User newUser){
-        User user = userService.registService(newUser);
+    public Result<User> registController(@RequestBody UserVo newUser){
+        User user = userService.registService(newUser.getAccount(),newUser.getPassword());
         if(user!=null){
             return new Result<User>(user,"注册成功");
         }else{

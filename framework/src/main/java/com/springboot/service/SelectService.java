@@ -1,6 +1,6 @@
 package com.springboot.service;
 
-import com.springboot.domain.Methord.Result;
+import com.springboot.domain.myMethord.Result;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 @CrossOrigin

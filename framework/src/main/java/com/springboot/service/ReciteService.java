@@ -1,6 +1,6 @@
 package com.springboot.service;
 
-import com.springboot.domain.Methord.Result;
+import com.springboot.domain.myMethord.Result;
 
 public interface ReciteService {
     Result recite(boolean state, Integer id, Integer uid);

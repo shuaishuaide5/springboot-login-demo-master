@@ -1,8 +1,7 @@
 package com.springboot.service;
 
-import com.springboot.domain.Methord.Result;
+import com.springboot.domain.myMethord.Result;
 import com.springboot.domain.entity.Words;
-import com.springboot.domain.vo.RecordVo;
 import com.springboot.domain.vo.TestVo;
 
 import java.util.List;

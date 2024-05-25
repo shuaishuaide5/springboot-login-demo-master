@@ -1,6 +1,6 @@
 package com.springboot.controller;
 
-import com.springboot.domain.Methord.Result;
+import com.springboot.domain.myMethord.Result;
 import com.springboot.domain.vo.UserWordVo;
 import com.springboot.service.ReciteService;
 import com.springboot.service.SelectService;

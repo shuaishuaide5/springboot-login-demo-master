@@ -1,11 +1,16 @@
 package com.springboot.service.serviceImpl;
 
+import com.springboot.domain.vo.UserVo;
 import com.springboot.repository.UserDao;
 import com.springboot.domain.entity.User;
 import com.springboot.service.UserService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+
+import java.util.Random;
+
+import static java.lang.Math.random;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -27,12 +32,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User registService(User user) {
+    public User registService(String uname, String password) {
         //当新用户的用户名已存在时
-        if(userDao.findByUname(user.getUname())!=null){
+        if(userDao.findByUname(uname)!=null){
             // 无法注册
             return null;
         }else{
+            User user = new User();
+            user.setPassword(password);
+            user.setUname(uname);
             //返回创建好的用户对象(带uid)
             User newUser = userDao.save(user);
             if(newUser != null){

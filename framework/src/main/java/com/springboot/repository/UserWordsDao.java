@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository;
  * @since 2024-05-25 10:25:41
  */
 @Repository
-public interface UserWordsDao extends JpaRepository<UserWords, Long> {
+public interface UserWordsDao extends BaseMapper<UserWords>{
 
 }
 

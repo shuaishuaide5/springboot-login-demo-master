@@ -1,13 +1,11 @@
-package com.springboot.domain.Methord;
+package com.springboot.domain.myMethord;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 @Data
 @AllArgsConstructor
