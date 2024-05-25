@@ -30,26 +30,30 @@ public class TestController {
     public TestController(ScheduledTask scheduledTask) {
         this.scheduledTask = scheduledTask;
     }*/
-    @RequestMapping("/Menu/testStart")
+    @RequestMapping("/Menu/testStart")//第一次点击测试按钮调用
     private Result testStart(@RequestBody TestVo test1) {
         if(test1.getSessionId() != "") return null;
         return testService.iftest(test1);
     }
-    @RequestMapping("/Menu/test")
+
+    @RequestMapping("/Menu/test")//只调用一次，用于计时，中途离开页面仍然计时
     private Result test(@RequestBody TestVo test1) {
         AtomicReference<Result> result = new AtomicReference<>();
-        if (testService.ifCanTest(test1)){
-            return Result.okResult("NO ACCESS");
-        }
+
         testService.test(test1.getUid(),test1.getTime());
         scheduleTask.startCountdown((long) (test1.getTime()), () -> {
             System.out.println( test1.getTime()*60+" seconds have passed! Performing a task...");
             testService.reFresh(test1);
             result.set(testService.finish());// 在这里执行任务逻辑
         });
-
         return result.get();
-        //return  reciteService.recite(enbook.getState(),enbook.getId(),enbook.getUid());
+    }
+    @RequestMapping("/Menu/continue")//离开页面后再进入时自动调用
+    private Result ifContinue(@RequestBody TestVo test1) {
+        if (testService.ifCanTest(test1)){
+            return Result.okResult("NO ACCESS");
+        }
+        return null;
     }
     @RequestMapping("/Menu/record")
     private void record(@RequestBody RecordVo recordVo) {

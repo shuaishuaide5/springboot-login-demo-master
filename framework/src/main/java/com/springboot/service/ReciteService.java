@@ -1,7 +1,7 @@
 package com.springboot.service;
 
-import com.springboot.domain.entity.ResponseResult;
+import com.springboot.domain.entity.Result;
 
 public interface ReciteService {
-    void recite(Integer state,Integer id,Integer uid);
+    Result recite(boolean state, Integer id, Integer uid);
 }

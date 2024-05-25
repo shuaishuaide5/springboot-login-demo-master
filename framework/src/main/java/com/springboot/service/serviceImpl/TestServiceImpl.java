@@ -59,7 +59,7 @@ public class TestServiceImpl extends ServiceImpl<WordsDao,Words> implements Test
     @Override
     public Result iftest(TestVo test1) {
         String sessionId = UUID.randomUUID().toString();
-        //Cookie sessionCookie = new Cookie("sessionId", sessionId);
+
 
         LambdaUpdateWrapper<Iftest> updateWrapper = new LambdaUpdateWrapper<>();
         updateWrapper.eq(Iftest::getId,test1.getUid()).set(Iftest::getTest,sessionId);
@@ -68,7 +68,7 @@ public class TestServiceImpl extends ServiceImpl<WordsDao,Words> implements Test
     }
 
     @Override
-    public boolean ifCanTest(TestVo test1) {
+    public boolean ifCanTest(TestVo test1) {//用于判断退出页面后能否再次答题，即是否为不同的用户
         LambdaQueryWrapper<Iftest> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(Iftest::getId,test1.getUid()).eq(Iftest::getTest,test1.getSessionId());
         Iftest temWord;

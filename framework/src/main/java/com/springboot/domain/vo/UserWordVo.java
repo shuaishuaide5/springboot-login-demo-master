@@ -3,7 +3,7 @@ package com.springboot.domain.vo;
 public class UserWordVo {
     private Integer id;
     private Integer uid;
-    private Integer state;
+    private boolean state;
 
 
     public Integer getId() {
@@ -22,11 +22,11 @@ public class UserWordVo {
         this.uid = uid;
     }
 
-    public Integer getState() {
+    public boolean getState() {
         return state;
     }
 
-    public void setState(Integer state) {
+    public void setState(boolean state) {
         this.state = state;
     }
 }

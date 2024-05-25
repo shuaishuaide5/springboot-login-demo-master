@@ -28,11 +28,11 @@ public class ReciteController {
     private Result selectNum(@PathVariable Integer number) {
         return numSelService.selectNum(number);
     }*/
-    @CrossOrigin
     @ResponseBody
+    @CrossOrigin
     @RequestMapping("/Menu/recite")
-    private void recite(@RequestBody UserWordVo userwordVo) {
-        reciteService.recite(userwordVo.getState(), userwordVo.getId(), userwordVo.getUid());
+    private Result recite(@RequestBody UserWordVo userwordVo) {
+        return reciteService.recite(userwordVo.getState(), userwordVo.getId(), userwordVo.getUid());
     }
 
 

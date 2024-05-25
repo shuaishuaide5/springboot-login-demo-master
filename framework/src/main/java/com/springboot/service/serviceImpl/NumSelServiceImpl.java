@@ -3,7 +3,6 @@ package com.springboot.service.serviceImpl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.springboot.domain.entity.ResponseResult;
 import com.springboot.domain.entity.Result;
 import com.springboot.domain.entity.Words;
 import com.springboot.domain.vo.WordsVo;
