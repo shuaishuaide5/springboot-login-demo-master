@@ -48,7 +48,7 @@ public class TestServiceImpl extends ServiceImpl<WordsDao,Words> implements Test
         LambdaUpdateWrapper<Iftest> updateWrapper = new LambdaUpdateWrapper<>();
         updateWrapper.eq(Iftest::getId,test1.getUid()).set(Iftest::getTest,sessionId);
         iftestDao.update(null,updateWrapper);
-        return Result.okResult(sessionId);
+        return Result.okResult("即将开始",sessionId);
     }
 
     @Override

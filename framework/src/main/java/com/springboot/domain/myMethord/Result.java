@@ -12,7 +12,7 @@ public class Result<T> {
     private String msg;
     private T data;
     private Integer uid;
-
+    private String sessionId;
     public Result(T data, String msg) {
         this.data = data;
         this.msg = msg;
@@ -33,6 +33,16 @@ public class Result<T> {
         Result result = new Result<>();
         if(msg!=null) {
             result.setMsg(msg);
+        }
+        return result;
+    }
+    public static Result okResult(String msg,String se) {
+        Result result = new Result<>();
+        if(msg!=null) {
+            result.setMsg(msg);
+        }
+        if(msg!=null) {
+            result.setSessionId(se);
         }
         return result;
     }
@@ -91,6 +101,7 @@ public class Result<T> {
         result.setCode("0");
         result.setMsg("成功");
         result.setUid(uid);
+        result.setSessionId("");
         return result;
     }
 
