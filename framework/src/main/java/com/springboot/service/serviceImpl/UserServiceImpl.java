@@ -39,14 +39,18 @@ public class UserServiceImpl implements UserService {
             return null;
         }else{
             User user = new User();
+
             user.setPassword(password);
             user.setUname(uname);
             //返回创建好的用户对象(带uid)
-            User newUser = userDao.save(user);
-            if(newUser != null){
-                newUser.setPassword("");
+            userDao.insert(user);
+            User newuser = new User();
+            newuser.setPassword(password);
+            newuser.setUname(uname);
+            if(newuser != null){
+                newuser.setPassword("");
             }
-            return newUser;
+            return newuser;
         }
     }
 }

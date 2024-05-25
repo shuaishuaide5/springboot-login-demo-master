@@ -25,7 +25,8 @@ public class TestServiceImpl extends ServiceImpl<WordsDao,Words> implements Test
     private IftestDao iftestDao;
     @Override
     public Result test(List<Words> wordsList) {
-        wordsList.remove(0);
+        if (!wordsList.isEmpty())
+            wordsList.remove(0);
         if (wordsList.isEmpty()) return Result.okResult("感谢你完成了今天的任务");
         return Result.okResult("还不可以休息哦");
     }

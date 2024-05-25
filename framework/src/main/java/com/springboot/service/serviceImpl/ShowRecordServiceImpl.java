@@ -23,7 +23,7 @@ public class ShowRecordServiceImpl implements ShowRecordService {
     @Autowired
     private WordsDao wordsDao;
     @Override
-    public void record(RecordVo recordVo) {
+    public void record(RecordVo recordVo) {//添加记录
         LambdaUpdateWrapper<Record> updateWrapper = new LambdaUpdateWrapper<>();
         updateWrapper.eq(Record::getId,recordVo.getUid());
         Record temRecord = recordDao.selectOne(updateWrapper);
@@ -41,7 +41,7 @@ public class ShowRecordServiceImpl implements ShowRecordService {
         //return null;
     }
     @Override
-    public Result show(Integer uid) {
+    public Result show(Integer uid) {//显示记录
         LambdaQueryWrapper<Record> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(Record::getId,uid);
         Boolean temb;
@@ -67,6 +67,6 @@ public class ShowRecordServiceImpl implements ShowRecordService {
                 System.out.println("Remaining string after deletion: " + str);
             }
         }
-        return Result.okResult(temRecord);
+        return Result.okResult(recordMapList);
     }
 }

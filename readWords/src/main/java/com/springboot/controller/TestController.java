@@ -40,9 +40,11 @@ public class TestController {
     }
     @RequestMapping("/Menu/copyList")//调用一次，将题目列表拷贝一份
     private Result copy(@RequestBody IntegerListDTO integerListDTO) {
-        wordsList = integerListDTO.getNumbers();
+        wordsList.add(new Words());
+        wordsList.addAll(integerListDTO.getNumbers());
+        System.out.println(wordsList+"___________________________________________________________________________________");
         //testService.test(integerListDTO.getNumbers());
-        return Result.okResult("测试开始");
+        return Result.okResult(wordsList);
     }
     @RequestMapping("/Menu/test")//每一次答题都调用
     private Result test(@RequestBody TestVo test1) {
@@ -64,7 +66,7 @@ public class TestController {
         if (testService.ifCanTest(test1)){
             return Result.okResult("NO ACCESS");
         }
-        return null;
+        return Result.okResult("归还",wordsList);
     }
     @RequestMapping("/Menu/returnCopy")//离开页面后再进入时由continue方法的返回值决定是否调用
     private Result returnCopy() {
@@ -74,7 +76,7 @@ public class TestController {
     @GetMapping("/Menu/ifTimeOut")
     private Result ifTimeOut() {
         if (testService.ifTimeOut(uid)) return Result.okResult("TIMEOUT");
-        return null;
+        return Result.okResult("TIME EXITS");
     }
     @RequestMapping("/Menu/record")
     private void record(@RequestBody RecordVo recordVo) {
