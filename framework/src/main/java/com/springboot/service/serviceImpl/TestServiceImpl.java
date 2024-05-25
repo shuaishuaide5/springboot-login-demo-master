@@ -4,8 +4,9 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.springboot.domain.entity.Iftest;
 import com.springboot.domain.entity.Record;
-import com.springboot.domain.entity.Result;
+import com.springboot.domain.Methord.Result;
 import com.springboot.domain.entity.Words;
+import com.springboot.domain.vo.RecordVo;
 import com.springboot.domain.vo.TestVo;
 import com.springboot.repository.IftestDao;
 import com.springboot.repository.RecordDao;
@@ -35,15 +36,17 @@ public class TestServiceImpl extends ServiceImpl<WordsDao,Words> implements Test
     }
 
     @Override
-    public void record(int uid,int id) {
+    public void record(RecordVo recordVo) {
         LambdaUpdateWrapper<Record> updateWrapper = new LambdaUpdateWrapper<>();
-        updateWrapper.eq(Record::getId,uid);
+        updateWrapper.eq(Record::getId,recordVo.getUid());
         Record temRecord = recordDao.selectOne(updateWrapper);
-        String tid ="";
-        if(id<=9) {
-            tid = "0";
+        String tid;
+        if (recordVo.getTOf() == 0) tid = "0";
+        else tid = "1";
+        if(recordVo.getId()<=9) {
+            tid = tid + "0";
         }
-        tid = tid + (long) id;
+        tid = tid + (long) recordVo.getId();
         temRecord.setSum(temRecord.getSum() + tid);
         updateWrapper.set(Record::getSum,temRecord.getSum());
         recordDao.update(null, updateWrapper);
@@ -52,7 +55,10 @@ public class TestServiceImpl extends ServiceImpl<WordsDao,Words> implements Test
     }
 
     @Override
-    public Result finish() {
+    public Result finish(TestVo test1) {
+        LambdaUpdateWrapper<Iftest> updateWrapper = new LambdaUpdateWrapper<>();
+        updateWrapper.eq(Iftest::getId,test1.getUid()).set(Iftest::getTest,"0");
+        iftestDao.update(null,updateWrapper);
         return Result.okResult("TIMEOUT");
     }
 
@@ -80,6 +86,13 @@ public class TestServiceImpl extends ServiceImpl<WordsDao,Words> implements Test
     public void reFresh(TestVo test1) {
         LambdaUpdateWrapper<Iftest> updateWrapper = new LambdaUpdateWrapper<>();
         updateWrapper.eq(Iftest::getId,test1.getUid()).set(Iftest::getTest,"0");
+    }
+
+    @Override
+    public boolean ifTimeOut(Integer uid) {
+        LambdaQueryWrapper<Iftest> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(Iftest::getId,uid).eq(Iftest::getTest,"0");
+        return iftestDao.selectOne(queryWrapper) == null;
     }
 
 }

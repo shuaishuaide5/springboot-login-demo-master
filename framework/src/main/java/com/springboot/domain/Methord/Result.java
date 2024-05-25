@@ -1,8 +1,4 @@
-package com.springboot.domain.entity;
-
-import com.springboot.domain.vo.WordsVo;
-
-import java.util.List;
+package com.springboot.domain.Methord;
 
 public class Result<T> {
     private String code;

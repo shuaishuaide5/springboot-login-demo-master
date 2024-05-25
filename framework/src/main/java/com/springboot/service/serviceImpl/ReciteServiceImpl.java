@@ -1,8 +1,8 @@
 package com.springboot.service.serviceImpl;
 
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.springboot.domain.Methord.Result;
 import com.springboot.domain.entity.*;
 import com.springboot.repository.UserWordsDao;
 import com.springboot.repository.WordsDao;
@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.List;
 
 @Service("reciteService")
 public class ReciteServiceImpl extends ServiceImpl<WordsDao, Words> implements ReciteService {

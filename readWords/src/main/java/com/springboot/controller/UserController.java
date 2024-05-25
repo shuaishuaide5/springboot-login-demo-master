@@ -1,7 +1,7 @@
 package com.springboot.controller;
 
 import com.springboot.domain.vo.UserVo;
-import com.springboot.domain.entity.Result;
+import com.springboot.domain.Methord.Result;
 import com.springboot.domain.entity.User;
 import com.springboot.service.UserService;
 import com.springboot.utils.JwtUtil;
