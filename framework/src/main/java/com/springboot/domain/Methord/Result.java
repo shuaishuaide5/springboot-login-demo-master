@@ -1,5 +1,9 @@
 package com.springboot.domain.Methord;
 
+import com.springboot.domain.entity.Words;
+
+import java.util.List;
+
 public class Result<T> {
     private String code;
     private String msg;
@@ -23,6 +27,17 @@ public class Result<T> {
     }
     public static Result okResult(String msg) {
         Result result = new Result<>();
+        if(msg!=null) {
+            result.setMsg(msg);
+        }
+        return result;
+    }
+
+    public static Result okResult(String msg,Object data) {
+        Result result = new Result<>();
+        if(data!=null) {
+            result.setData(data);
+        }
         if(msg!=null) {
             result.setMsg(msg);
         }

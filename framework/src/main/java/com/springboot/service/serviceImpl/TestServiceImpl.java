@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 
 import java.time.Instant;
+import java.util.List;
 import java.util.UUID;
 
 @Service("testService")
@@ -26,13 +27,10 @@ public class TestServiceImpl extends ServiceImpl<WordsDao,Words> implements Test
     @Autowired
     private IftestDao iftestDao;
     @Override
-    public void test(int uid,int time) {
-        Instant now = Instant.now();
-        LambdaUpdateWrapper<Record> updateWrapper = new LambdaUpdateWrapper<>();
-        updateWrapper.eq(Record::getId,uid);
-        updateWrapper.set(Record::getTime,now);
-        recordDao.update(null, updateWrapper);
-
+    public Result test(List<Words> wordsList) {
+        wordsList.remove(0);
+        if (wordsList.isEmpty()) return Result.okResult("感谢你完成了今天的任务");
+        return Result.okResult("还不可以休息哦");
     }
 
 
