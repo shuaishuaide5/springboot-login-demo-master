@@ -35,24 +35,7 @@ public class TestServiceImpl extends ServiceImpl<WordsDao,Words> implements Test
 
     }
 
-    @Override
-    public void record(RecordVo recordVo) {
-        LambdaUpdateWrapper<Record> updateWrapper = new LambdaUpdateWrapper<>();
-        updateWrapper.eq(Record::getId,recordVo.getUid());
-        Record temRecord = recordDao.selectOne(updateWrapper);
-        String tid;
-        if (recordVo.getTOf() == 0) tid = "0";
-        else tid = "1";
-        if(recordVo.getId()<=9) {
-            tid = tid + "0";
-        }
-        tid = tid + (long) recordVo.getId();
-        temRecord.setSum(temRecord.getSum() + tid);
-        updateWrapper.set(Record::getSum,temRecord.getSum());
-        recordDao.update(null, updateWrapper);
-        System.out.println("ok");
-        //return null;
-    }
+
 
     @Override
     public Result finish(TestVo test1) {
@@ -92,7 +75,7 @@ public class TestServiceImpl extends ServiceImpl<WordsDao,Words> implements Test
     public boolean ifTimeOut(Integer uid) {
         LambdaQueryWrapper<Iftest> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(Iftest::getId,uid).eq(Iftest::getTest,"0");
-        return iftestDao.selectOne(queryWrapper) == null;
+        return iftestDao.selectOne(queryWrapper) != null;
     }
 
 }

@@ -1,10 +1,12 @@
 package com.springboot.service.serviceImpl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.springboot.domain.entity.Record;
 import com.springboot.domain.Methord.Result;
 import com.springboot.domain.Methord.RecordMap;
 import com.springboot.domain.entity.Words;
+import com.springboot.domain.vo.RecordVo;
 import com.springboot.repository.RecordDao;
 import com.springboot.repository.WordsDao;
 import com.springboot.service.ShowRecordService;
@@ -20,6 +22,24 @@ public class ShowRecordServiceImpl implements ShowRecordService {
     private  RecordDao recordDao;
     @Autowired
     private WordsDao wordsDao;
+    @Override
+    public void record(RecordVo recordVo) {
+        LambdaUpdateWrapper<Record> updateWrapper = new LambdaUpdateWrapper<>();
+        updateWrapper.eq(Record::getId,recordVo.getUid());
+        Record temRecord = recordDao.selectOne(updateWrapper);
+        String tid;
+        if (recordVo.getTOf() == 0) tid = "0";
+        else tid = "1";
+        if(recordVo.getId()<=9) {
+            tid = tid + "0";
+        }
+        tid = tid + (long) recordVo.getId();
+        temRecord.setSum(temRecord.getSum() + tid);
+        updateWrapper.set(Record::getSum,temRecord.getSum());
+        recordDao.update(null, updateWrapper);
+        System.out.println("ok");
+        //return null;
+    }
     @Override
     public Result show(Integer uid) {
         LambdaQueryWrapper<Record> queryWrapper = new LambdaQueryWrapper<>();

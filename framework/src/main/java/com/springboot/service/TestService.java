@@ -7,7 +7,7 @@ import com.springboot.domain.vo.TestVo;
 public interface TestService {
     void test(int uid,int time);
 
-    void record(RecordVo recordVo);
+    //void record(RecordVo recordVo);
     Result finish(TestVo test1);
 
 
