@@ -8,6 +8,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 /**
@@ -17,14 +19,15 @@ import javax.persistence.Id;
  * @since 2024-05-25 10:25:43
  */
 @SuppressWarnings("serial")
-@Data
 @Entity
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @TableName("user_words")
 public class UserWords extends Model<UserWords> {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 //用户id
     private Integer userId;

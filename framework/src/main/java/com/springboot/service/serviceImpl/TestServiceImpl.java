@@ -79,7 +79,7 @@ public class TestServiceImpl extends ServiceImpl<WordsDao,Words> implements Test
     @Override
     public void reFresh(TestVo test1) {
         LambdaUpdateWrapper<Iftest> updateWrapper = new LambdaUpdateWrapper<>();
-        updateWrapper.eq(Iftest::getId,test1.getUid()).set(Iftest::getTest,"");
+        updateWrapper.eq(Iftest::getId,test1.getUid()).set(Iftest::getTest,"0");
     }
 
 }

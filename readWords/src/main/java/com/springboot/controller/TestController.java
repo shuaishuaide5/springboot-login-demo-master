@@ -45,6 +45,7 @@ public class TestController {
             System.out.println( test1.getTime()*60+" seconds have passed! Performing a task...");
             testService.reFresh(test1);
             result.set(testService.finish());// 在这里执行任务逻辑
+
         });
         return result.get();
     }
