@@ -8,5 +8,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RecordVo {
-    private Integer id; private Integer uid; private Integer tOf;//对或错
+    private Integer id; private Integer uid; private Boolean trueORfalse;//对或错
 }

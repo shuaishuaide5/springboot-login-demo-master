@@ -13,6 +13,7 @@ import com.springboot.service.ShowRecordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,13 +24,15 @@ public class ShowRecordServiceImpl implements ShowRecordService {
     @Autowired
     private WordsDao wordsDao;
     @Override
-    public void record(RecordVo recordVo) {//添加记录
+    public Result record(RecordVo recordVo) {//添加记录
         LambdaUpdateWrapper<Record> updateWrapper = new LambdaUpdateWrapper<>();
-        updateWrapper.eq(Record::getId,recordVo.getUid());
+        updateWrapper.eq(Record::getId,recordVo.getUid()).set(Record::getTime, LocalDateTime.now());
         Record temRecord = recordDao.selectOne(updateWrapper);
         String tid;
-        if (recordVo.getTOf() == 0) tid = "0";
-        else tid = "1";
+        if (!recordVo.getTrueORfalse()) tid = "0";
+        else {
+            tid = "1";updateWrapper.set(Record::getGoal,temRecord.getGoal()+1);
+        }
         if(recordVo.getId()<=9) {
             tid = tid + "0";
         }
@@ -38,7 +41,7 @@ public class ShowRecordServiceImpl implements ShowRecordService {
         updateWrapper.set(Record::getSum,temRecord.getSum());
         recordDao.update(null, updateWrapper);
         System.out.println("ok");
-        //return null;
+        return Result.okResult("已修改");
     }
     @Override
     public Result show(Integer uid) {//显示记录
@@ -47,10 +50,11 @@ public class ShowRecordServiceImpl implements ShowRecordService {
         Boolean temb;
         Integer temi;
         List<RecordMap> recordMapList = new ArrayList<>();
+        //List<String> stringList = new ArrayList<>();
         List<Record> temRecord;
         temRecord = recordDao.selectList(queryWrapper);
         for (Record tem : temRecord){
-            String str = tem.toString();
+            String str = tem.getSum().substring(4);
             while (!str.isEmpty()) {
                 String firstThree = str.substring(0, 3);
                 String one = firstThree.substring(0,1);
@@ -61,12 +65,13 @@ public class ShowRecordServiceImpl implements ShowRecordService {
                 LambdaQueryWrapper<Words> queryWrapper2 = new LambdaQueryWrapper<>();
                 queryWrapper2.eq(Words::getId,temi);
                 Words temwords = wordsDao.selectOne(queryWrapper2);
+                //stringList.add(temwords.getEnglish()+temwords.getChinese());
                 recordMapList.add(new RecordMap(temwords.getEnglish(),temb));
                     // 删除前三个字符
                 str = str.substring(3);
                 System.out.println("Remaining string after deletion: " + str);
             }
         }
-        return Result.okResult("msg");
+        return Result.okResult(recordMapList);
     }
 }

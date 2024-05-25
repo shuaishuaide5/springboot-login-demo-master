@@ -5,5 +5,5 @@ import com.springboot.domain.vo.RecordVo;
 
 public interface ShowRecordService {
     Result show(Integer uid);
-    void record(RecordVo recordVo);
+    Result record(RecordVo recordVo);
 }
