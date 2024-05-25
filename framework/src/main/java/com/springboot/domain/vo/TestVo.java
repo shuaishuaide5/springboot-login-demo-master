@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TestVo {
-    private int uid;
-    private int time;//分钟
+    private Integer uid;
+    private Integer time;//分钟
     private String sessionId;
 }

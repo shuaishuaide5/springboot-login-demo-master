@@ -14,4 +14,6 @@ public interface TestService {
     Result iftest(TestVo test1);
 
     boolean ifCanTest(TestVo test1);
+
+    void reFresh(TestVo test1);
 }

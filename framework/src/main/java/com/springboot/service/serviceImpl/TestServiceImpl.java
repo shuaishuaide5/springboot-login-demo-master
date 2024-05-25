@@ -76,4 +76,10 @@ public class TestServiceImpl extends ServiceImpl<WordsDao,Words> implements Test
         return temWord==null;
     }
 
+    @Override
+    public void reFresh(TestVo test1) {
+        LambdaUpdateWrapper<Iftest> updateWrapper = new LambdaUpdateWrapper<>();
+        updateWrapper.eq(Iftest::getId,test1.getUid()).set(Iftest::getTest,"");
+    }
+
 }

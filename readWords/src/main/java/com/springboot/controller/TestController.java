@@ -3,8 +3,10 @@ package com.springboot.controller;
 import com.springboot.domain.entity.Result;
 import com.springboot.domain.vo.RecordVo;
 import com.springboot.domain.vo.TestVo;
+import com.springboot.service.ShowRecordService;
 import com.springboot.service.TestService;
 import com.springboot.utils.ScheduleTask;
+import com.sun.deploy.panel.JreFindDialog;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,6 +22,8 @@ public class TestController {
     @Autowired
     private TestService testService;
     @Autowired
+    private ShowRecordService showRecordService;
+    @Autowired
     private final ScheduleTask scheduleTask = new ScheduleTask();
 
    /* @Autowired
@@ -28,7 +32,7 @@ public class TestController {
     }*/
     @RequestMapping("/Menu/testStart")
     private Result testStart(@RequestBody TestVo test1) {
-        if(test1.getSessionId() != null) return null;
+        if(test1.getSessionId() != "") return null;
         return testService.iftest(test1);
     }
     @RequestMapping("/Menu/test")
@@ -40,6 +44,7 @@ public class TestController {
         testService.test(test1.getUid(),test1.getTime());
         scheduleTask.startCountdown((long) (test1.getTime()), () -> {
             System.out.println( test1.getTime()*60+" seconds have passed! Performing a task...");
+            testService.reFresh(test1);
             result.set(testService.finish());// 在这里执行任务逻辑
         });
 
@@ -52,5 +57,10 @@ public class TestController {
         int uid = recordVo.getUid();
         testService.record(uid,id);
         //return  reciteService.recite(enbook.getState(),enbook.getId(),enbook.getUid());
+    }
+    @RequestMapping("/Menu/showRecord")
+    private Result showRecord(@RequestBody Integer Uid) {
+
+        return showRecordService.show(Uid);
     }
 }
