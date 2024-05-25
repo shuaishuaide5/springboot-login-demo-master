@@ -58,7 +58,8 @@ public class TestController {
         scheduleTask.startCountdown((long) (test1.getTime()*60), () -> {
             System.out.println( test1.getTime()*60+" seconds have passed! Performing a task...");
             testService.reFresh(test1);
-            result.set(testService.finish(test1));// 在这里执行任务逻辑
+            result.set(testService.finish(test1));
+            wordsList.clear();// 清空列表
         });
     }
     @RequestMapping("/Menu/continue")//离开页面后再进入时自动调用，判断还能不能答题
@@ -66,12 +67,17 @@ public class TestController {
         if (testService.ifCanTest(test1)){
             return Result.okResult("NO ACCESS");
         }
-        return Result.okResult("归还",wordsList);
+        return Result.okResult("继续");
     }
     @RequestMapping("/Menu/returnCopy")//离开页面后再进入时由continue方法的返回值决定是否调用
     private Result returnCopy() {
 
         return Result.okResult("归还",wordsList);
+    }
+    @RequestMapping("/Menu/noreturnCopy")//离开页面后再进入时由continue方法的返回值决定是否调用
+    private Result noreturnCopy() {
+        wordsList.clear();
+        return Result.okResult("结束");
     }
     @GetMapping("/Menu/ifTimeOut")//每一次答题都调用，用于测试时间是否耗尽
     private Result ifTimeOut() {

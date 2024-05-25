@@ -38,6 +38,7 @@ public class TestServiceImpl extends ServiceImpl<WordsDao,Words> implements Test
         LambdaUpdateWrapper<Iftest> updateWrapper = new LambdaUpdateWrapper<>();
         updateWrapper.eq(Iftest::getId,test1.getUid()).set(Iftest::getTest,"0");
         iftestDao.update(null,updateWrapper);
+
         return Result.okResult("TIMEOUT");
     }
 
