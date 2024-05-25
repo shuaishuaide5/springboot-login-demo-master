@@ -1,6 +1,7 @@
 package com.springboot.domain.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.extension.activerecord.Model;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
@@ -10,7 +11,7 @@ import javax.persistence.*;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
+public class User extends Model<User> {
     // 注意属性名要与数据表中的字段名一致
 
     @Id
@@ -47,8 +48,4 @@ public class User {
         this.password = password;
     }
 
-    public User(String uname, String password) {
-        this.uname = uname;
-        this.password = password;
-    }
 }

@@ -73,7 +73,7 @@ public class TestController {
 
         return Result.okResult("归还",wordsList);
     }
-    @GetMapping("/Menu/ifTimeOut")
+    @GetMapping("/Menu/ifTimeOut")//每一次答题都调用，用于测试时间是否耗尽
     private Result ifTimeOut() {
         if (testService.ifTimeOut(uid)) return Result.okResult("TIMEOUT");
         return Result.okResult("TIME EXITS");

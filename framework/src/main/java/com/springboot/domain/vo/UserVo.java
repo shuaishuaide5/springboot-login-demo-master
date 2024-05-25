@@ -18,7 +18,7 @@ public class UserVo {
     private String password;
 
 
-    /*public String getAccount() {
+    public String getAccount() {
         return account;
     }
 
@@ -32,6 +32,6 @@ public class UserVo {
 
     public void setPassword(String password) {
         this.password = password;
-    }*/
+    }
 }
 

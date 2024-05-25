@@ -67,6 +67,6 @@ public class ShowRecordServiceImpl implements ShowRecordService {
                 System.out.println("Remaining string after deletion: " + str);
             }
         }
-        return Result.okResult(recordMapList);
+        return Result.okResult("msg");
     }
 }

@@ -1,5 +1,10 @@
 package com.springboot.service.serviceImpl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
+import com.springboot.domain.entity.Iftest;
+import com.springboot.domain.entity.Record;
+import com.springboot.domain.myMethord.Result;
 import com.springboot.domain.vo.UserVo;
 import com.springboot.repository.UserDao;
 import com.springboot.domain.entity.User;
@@ -23,7 +28,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public User loginService(String uname, String password) {
         // 如果账号密码都对则返回登录的用户对象，若有一个错误则返回null
-        User user = userDao.findByUnameAndPassword(uname, password);
+        //User user = userDao.findByUnameAndPassword(uname, password);
+        LambdaUpdateWrapper<User> updateWrapper = new LambdaUpdateWrapper<>();
+        updateWrapper.eq(User::getUname,uname).eq(User::getPassword,password);
+        User user = userDao.selectOne(updateWrapper);
         // 重要信息置空
         if(user != null){
             user.setPassword("");
@@ -32,9 +40,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User registService(String uname, String password) {
+    public Result registService(String uname, String password) {
         //当新用户的用户名已存在时
-        if(userDao.findByUname(uname)!=null){
+        LambdaQueryWrapper<User> updateWrapper = new LambdaQueryWrapper<>();
+        updateWrapper.eq(User::getUname,uname);
+        User user1 = userDao.selectOne(updateWrapper);
+        if(user1!=null){
             // 无法注册
             return null;
         }else{
@@ -44,13 +55,8 @@ public class UserServiceImpl implements UserService {
             user.setUname(uname);
             //返回创建好的用户对象(带uid)
             userDao.insert(user);
-            User newuser = new User();
-            newuser.setPassword(password);
-            newuser.setUname(uname);
-            if(newuser != null){
-                newuser.setPassword("");
-            }
-            return newuser;
+
+            return Result.okResult("user");
         }
     }
 }
