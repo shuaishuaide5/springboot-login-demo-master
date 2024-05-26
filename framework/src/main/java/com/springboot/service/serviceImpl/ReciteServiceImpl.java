@@ -8,11 +8,13 @@ import com.springboot.repository.UserWordsDao;
 import com.springboot.repository.WordsDao;
 import com.springboot.service.ReciteService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 
-@Service("reciteService")
+@Service
+@Component
 public class ReciteServiceImpl extends ServiceImpl<WordsDao, Words> implements ReciteService {
     static Integer MAX_WORDS = 4;
     @Resource

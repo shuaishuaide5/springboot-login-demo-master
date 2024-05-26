@@ -1,4 +1,4 @@
-package com.springboot.controller;
+package com.springboot2.controller;
 
 import com.springboot.domain.vo.UserVo;
 import com.springboot.domain.myMethord.Result;

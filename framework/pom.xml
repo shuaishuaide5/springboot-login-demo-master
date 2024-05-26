@@ -9,8 +9,9 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <groupId>com.sangeng</groupId>
+    <groupId>com.springboot</groupId>
     <artifactId>framework</artifactId>
+    <packaging>jar</packaging>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>

@@ -2,11 +2,12 @@ package com.springboot.domain.myMethord;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import org.springframework.stereotype.Component;
+
 
 @Data
 @AllArgsConstructor
-
+@Component
 public class Result<T> {
     private String code;
     private String msg;
