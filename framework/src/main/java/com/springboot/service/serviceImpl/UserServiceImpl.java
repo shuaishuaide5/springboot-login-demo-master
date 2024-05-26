@@ -13,10 +13,6 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 
-import java.util.Random;
-
-import static java.lang.Math.random;
-
 @Service
 public class UserServiceImpl implements UserService {
     @Resource

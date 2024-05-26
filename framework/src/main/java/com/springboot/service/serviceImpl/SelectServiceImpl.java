@@ -7,7 +7,6 @@ import com.springboot.domain.myMethord.Result;
 import com.springboot.domain.entity.Words;
 import com.springboot.repository.WordsDao;
 import com.springboot.service.SelectService;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.CrossOrigin;
 

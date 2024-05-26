@@ -2,7 +2,7 @@ package com.springboot.domain.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
-import java.io.Serializable;
+
 import java.time.Instant;
 
 import lombok.AllArgsConstructor;

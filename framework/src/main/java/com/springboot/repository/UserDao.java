@@ -3,7 +3,6 @@ package com.springboot.repository;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.springboot.domain.entity.Record;
 import com.springboot.domain.entity.User;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository

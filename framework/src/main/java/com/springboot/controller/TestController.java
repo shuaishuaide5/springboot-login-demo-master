@@ -1,4 +1,4 @@
-package com.springboot2.controller;
+package com.springboot.controller;
 
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.springboot.domain.DTO.IntegerListDTO;

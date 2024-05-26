@@ -2,13 +2,13 @@ package com.springboot.service.serviceImpl;
 
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.springboot.domain.entity.UserWords;
+import com.springboot.domain.entity.Words;
 import com.springboot.domain.myMethord.Result;
-import com.springboot.domain.entity.*;
 import com.springboot.repository.UserWordsDao;
 import com.springboot.repository.WordsDao;
 import com.springboot.service.ReciteService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
