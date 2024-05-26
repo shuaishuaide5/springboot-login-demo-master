@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 
 @Service
-@Component
 public class ReciteServiceImpl extends ServiceImpl<WordsDao, Words> implements ReciteService {
     static Integer MAX_WORDS = 4;
     @Resource

@@ -15,7 +15,6 @@ import java.util.List;
 
 
 @Service
-@Component
 @CrossOrigin
 public class SelectServiceImpl extends ServiceImpl<WordsDao,Words> implements SelectService {
     @Override
