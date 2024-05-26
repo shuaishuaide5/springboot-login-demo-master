@@ -20,22 +20,7 @@ public class UserController {
     @Resource
     private UserService userService;
 
-    /*@PostMapping("/login")//@RequestParam String uname, @RequestParam String password
-    public ResponseResult loginController(@RequestBody Enbook user){
-        User user2 = userService.loginService(user.getAccount(), user.getPassword());
-        Map<String, Object> map;
-        if(user2!=null){
-            map = new HashMap<>();
-            String token;
-            //String uid = (String) user2.getUid();
-            token = JwtUtil.createJWT(UUID.randomUUID().toString(), String.valueOf(user2.getUid()), null);
-            map.put("token", token);
-            ResponseResult<String> bak = new ResponseResult<>(200, "登陆成功", token, user2.getUid());
-            return bak;
-        }else{
-            return new ResponseResult<>(300,"用户名或密码错误，请重新登录");
-        }
-    }*/
+
 
     @PostMapping("/login")//@RequestParam String uname, @RequestParam String password
     public Result loginController(@RequestBody UserVo user){

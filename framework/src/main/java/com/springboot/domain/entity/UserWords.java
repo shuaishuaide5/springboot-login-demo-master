@@ -34,7 +34,7 @@ public class UserWords extends Model<UserWords> {
 
     private Integer wordId;
 
-
+    private Integer times;
 
     /**
      * 获取主键值
